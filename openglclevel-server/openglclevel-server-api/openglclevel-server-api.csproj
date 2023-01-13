@@ -17,7 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\openglclevel-server-backend\openglclevel-server-core.csproj" />
     <ProjectReference Include="..\openglclevel-server-data\openglclevel-server-data.csproj" />
+    <ProjectReference Include="..\openglclevel-server-infrastructure\openglclevel-server-infrastructure.csproj" />
     <ProjectReference Include="..\openglclevel-server-models\openglclevel-server-models.csproj" />
   </ItemGroup>
 
