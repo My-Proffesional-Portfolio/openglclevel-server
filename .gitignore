@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/openglclevel-server/openglclevel-server-models/bin/Debug/net7.0
+/openglclevel-server/openglclevel-server-models/obj/Debug/net7.0/ref
+/openglclevel-server/openglclevel-server-models/obj/Debug/net7.0/refint
+/openglclevel-server/openglclevel-server-infrastructure/bin/Debug/net7.0
+/openglclevel-server/openglclevel-server-infrastructure/obj/Debug/net7.0/ref
+/openglclevel-server/openglclevel-server-infrastructure/obj/Debug/net7.0/refint
+/openglclevel-server/openglclevel-server-data/bin/Debug/net7.0
+/openglclevel-server/openglclevel-server-backend/obj/Debug/net7.0
