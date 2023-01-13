@@ -7,4 +7,9 @@
     <!--<Nullable>enable</Nullable>-->
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\openglclevel-server-data\openglclevel-server-data.csproj" />
+    <ProjectReference Include="..\openglclevel-server-models\openglclevel-server-models.csproj" />
+  </ItemGroup>
+
 </Project>
