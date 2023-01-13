@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\openglclevel-server-api.props" />
+</Project>
