@@ -1,4 +1,5 @@
 ﻿using openglclevel_server_models.Requests.Accounts;
+using openglclevel_server_models.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace openglclevel_server_infrastructure.Services
 {
     public interface IUserService
     {
-        public string RegisterUser(NewRegisterModel newRegister);
+        public  Task<EncryptorResultModel> RegisterUser(NewRegisterModel newRegister);
     }
 }

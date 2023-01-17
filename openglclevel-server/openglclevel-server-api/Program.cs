@@ -2,9 +2,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using openglclevel_server_backend.Services;
 using openglclevel_server_data.DataAccess;
+using openglclevel_server_infrastructure.Repositories;
+using openglclevel_server_infrastructure.Repositories.Interfaces;
 using openglclevel_server_infrastructure.Services;
 using openglclevel_server_models;
 using openglclevel_server_models.API.Security;
+using openglclevel_server_security.Encryptor;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +29,8 @@ builder.Services.AddSingleton<ISecurityKeys>((serviceProvider) =>
 
 
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<EncryptorEngine>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

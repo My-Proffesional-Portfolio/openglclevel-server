@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33103.201
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "openglclevel-server-api", "openglclevel-server-api\openglclevel-server-api.csproj", "{E7A6CC28-92EF-4F03-A577-BF9A0B3CC3B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "openglclevel-server-api", "openglclevel-server-api\openglclevel-server-api.csproj", "{E7A6CC28-92EF-4F03-A577-BF9A0B3CC3B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "openglclevel-server-core", "openglclevel-server-backend\openglclevel-server-core.csproj", "{CFD34CCB-0138-43F3-B3E5-0D0C81172B84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "openglclevel-server-core", "openglclevel-server-backend\openglclevel-server-core.csproj", "{CFD34CCB-0138-43F3-B3E5-0D0C81172B84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "openglclevel-server-models", "openglclevel-server-models\openglclevel-server-models.csproj", "{555D2F74-61EF-41EE-81C8-A04E53DF6E48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "openglclevel-server-models", "openglclevel-server-models\openglclevel-server-models.csproj", "{555D2F74-61EF-41EE-81C8-A04E53DF6E48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "openglclevel-server-data", "openglclevel-server-data\openglclevel-server-data.csproj", "{34DC8424-6B28-4792-8D01-B0CCF9EBFEF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "openglclevel-server-data", "openglclevel-server-data\openglclevel-server-data.csproj", "{34DC8424-6B28-4792-8D01-B0CCF9EBFEF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "openglclevel-server-infrastructure", "openglclevel-server-infrastructure\openglclevel-server-infrastructure.csproj", "{548647FF-352B-4139-A8D1-93EF2DBF47B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "openglclevel-server-infrastructure", "openglclevel-server-infrastructure\openglclevel-server-infrastructure.csproj", "{548647FF-352B-4139-A8D1-93EF2DBF47B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "openglclevel-server-security", "openglclevel-server-security\openglclevel-server-security.csproj", "{661600C8-CE70-4615-9260-1ADD7FE2554B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{548647FF-352B-4139-A8D1-93EF2DBF47B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{548647FF-352B-4139-A8D1-93EF2DBF47B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{548647FF-352B-4139-A8D1-93EF2DBF47B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{661600C8-CE70-4615-9260-1ADD7FE2554B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{661600C8-CE70-4615-9260-1ADD7FE2554B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{661600C8-CE70-4615-9260-1ADD7FE2554B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{661600C8-CE70-4615-9260-1ADD7FE2554B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

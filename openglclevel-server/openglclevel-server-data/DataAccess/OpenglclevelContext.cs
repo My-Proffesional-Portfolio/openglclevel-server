@@ -19,13 +19,14 @@ public partial class OpenglclevelContext : DbContext
 
     public virtual DbSet<MealEventItem> MealEventItems { get; set; }
 
+    public virtual DbSet<MealItem> MealItems { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-
+        //Scaffold-DbContext "Server=DESKTOP-VL2FT7Q\SQLEXPRESS;Database=openglclevel;Trusted_Connection=True;Encrypt=False"  Microsoft.EntityFrameworkCore.SqlServer -OutputDir DataAccess -F
     }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<MealEvent>(entity =>
@@ -49,11 +50,29 @@ public partial class OpenglclevelContext : DbContext
 
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Description).IsRequired();
+            entity.Property(e => e.MealItemId).HasColumnName("MealItemID");
 
             entity.HasOne(d => d.MealEvent).WithMany(p => p.MealEventItems)
                 .HasForeignKey(d => d.MealEventId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__MealEvent__MealE__2A4B4B5E");
+
+            entity.HasOne(d => d.MealItem).WithMany(p => p.MealEventItems)
+                .HasForeignKey(d => d.MealItemId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__MealEvent__MealI__37A5467C");
+        });
+
+        modelBuilder.Entity<MealItem>(entity =>
+        {
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.MealName).IsRequired();
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+
+            entity.HasOne(d => d.User).WithMany(p => p.MealItems)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__MealItems__UserI__3A81B327");
         });
 
         modelBuilder.Entity<User>(entity =>

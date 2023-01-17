@@ -22,4 +22,6 @@ public partial class User
     public string FirstName { get; set; }
 
     public virtual ICollection<MealEvent> MealEvents { get; } = new List<MealEvent>();
+
+    public virtual ICollection<MealItem> MealItems { get; } = new List<MealItem>();
 }
