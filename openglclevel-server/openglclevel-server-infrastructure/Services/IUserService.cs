@@ -11,5 +11,7 @@ namespace openglclevel_server_infrastructure.Services
     public interface IUserService
     {
         public  Task<EncryptorResultModel> RegisterUser(NewRegisterModel newRegister);
+        public Task<TokenResultModel> Login(string userName, string password);
+
     }
 }

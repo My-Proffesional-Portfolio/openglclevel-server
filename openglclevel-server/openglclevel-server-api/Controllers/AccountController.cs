@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using openglclevel_server_infrastructure.Services;
 using openglclevel_server_models.API.Security;
 using openglclevel_server_models.Requests.Accounts;
@@ -22,9 +23,20 @@ namespace openglclevel_server_api.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("login")]
+        public async Task<IActionResult> login(string userName, string password)
         {
-            return new string[] { "value1", "value2" };
+            var result = await _userSC.Login(userName, password);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("userData")]
+        [Authorize]
+        public IActionResult userData(string userName)
+        {
+            var result = new {userName = "userName"};
+            return Ok(result);
         }
 
         // GET api/<AccountController>/5

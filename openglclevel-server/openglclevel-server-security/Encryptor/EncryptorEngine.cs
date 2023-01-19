@@ -18,7 +18,7 @@ namespace openglclevel_server_security.Encryptor
             _securityKeysValues = securityKeysValues;
         }
 
-        public EncryptorResultModel PasswordEncrypt(string password)
+        public async Task<EncryptorResultModel> PasswordEncrypt(string password)
         {
 
             //string secretKey = UtilService.GetAppSettingsConfiguration("security", "passwordPrivateKey");
@@ -39,7 +39,7 @@ namespace openglclevel_server_security.Encryptor
                 {
                     using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
                     {
-                        cs.Write(clearBytes, 0, clearBytes.Length);
+                        await cs.WriteAsync(clearBytes, 0, clearBytes.Length);
                         cs.Close();
                     }
                     passwordHash = Convert.ToBase64String(ms.ToArray());

@@ -1,4 +1,5 @@
 ﻿using openglclevel_server_models.API.Security;
+using openglclevel_server_models.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace openglclevel_server_security.Decryptor
             _securityKeysValues = securityKeysValues;
         }
 
-        public object Decrypt(string hashedPassword, string salt)
+        public async Task<DecryptorResultModel> Decrypt(string hashedPassword, string salt)
         {
             try
             {
@@ -36,17 +37,17 @@ namespace openglclevel_server_security.Decryptor
                     {
                         using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
                         {
-                            cs.Write(cipherBytes, 0, cipherBytes.Length);
+                            await cs.WriteAsync(cipherBytes, 0, cipherBytes.Length);
                             cs.Close();
                         }
                         password = Encoding.Unicode.GetString(ms.ToArray());
                     }
                 }
-                return new { plainPassword = password, IsError = false, ErrorMessage = "", TechnicalMessage = "" };
+                return new DecryptorResultModel { PlainPassword = password, IsError = false, ErrorMessage = "", TechnicalMessage = "" };
             }
             catch (Exception ex)
             {
-                return new { plainPassword = "", IsError = true, ErrorMessage = "Cannot decrypt given password", TechnicalMessage = ex.Message };
+                return new DecryptorResultModel  { PlainPassword = "", IsError = true, ErrorMessage = "Cannot decrypt given password", TechnicalMessage = ex.Message };
             }
         }
 

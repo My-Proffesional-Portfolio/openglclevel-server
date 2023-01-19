@@ -25,6 +25,8 @@ namespace openglclevel_server_security.TokenManager
         {
             var permClaims = new List<Claim>();
 
+            tokenInfo.ForEach(fe => permClaims.Add(new Claim(fe.Key, fe.Value)));
+
             //permClaims.Add(new Claim("companyId", userInfo.CompanyId.ToString()));
             //permClaims.Add(new Claim("email", userInfo.Email));
 
@@ -35,7 +37,7 @@ namespace openglclevel_server_security.TokenManager
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var expiration = DateTime.Now.AddDays(365);
 
-            var token = new JwtSecurityToken("openSalt.auth",
+            var token = new JwtSecurityToken("openglclevel-app",
               tokenAudience, claims: permClaims,
               null,
               expires: expiration,
