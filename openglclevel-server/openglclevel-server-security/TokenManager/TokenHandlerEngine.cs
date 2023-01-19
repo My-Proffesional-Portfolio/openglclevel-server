@@ -51,5 +51,13 @@ namespace openglclevel_server_security.TokenManager
             return new TokenResultModel { Token = new JwtSecurityTokenHandler().WriteToken(token) };
 
         }
+
+        public JwtSecurityToken GetTokenDataByStringValue(string rawToken)
+        {
+            var token = rawToken;
+            var handler = new JwtSecurityTokenHandler();
+            var jwtSecurityToken = handler.ReadJwtToken(token);
+            return jwtSecurityToken;
+        }
     }
 }
