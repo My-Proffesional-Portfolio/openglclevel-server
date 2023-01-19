@@ -39,12 +39,6 @@ namespace openglclevel_server_api.Controllers
             return Ok(result);
         }
 
-        // GET api/<AccountController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
         // POST api/<AccountController>
         [HttpPost]
@@ -55,16 +49,6 @@ namespace openglclevel_server_api.Controllers
            return Ok(result);
         }
 
-        // PUT api/<AccountController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
 
-        // DELETE api/<AccountController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
