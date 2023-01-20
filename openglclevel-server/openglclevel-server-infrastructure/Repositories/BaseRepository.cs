@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using openglclevel_server_data.DataAccess;
 using openglclevel_server_infrastructure.Repositories.Interfaces;
+using openglclevel_server_models.Pagination;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,28 +51,28 @@ namespace openglclevel_server_infrastructure.Repositories
             return await _dbContext.Set<TEntity>().ToListAsync();
         }
 
-        //public async Task<PaginationListEntityDTO<TEntity>> GetAllPagedAsync<T>(int page, int pageSize, Expression<Func<TEntity, T>> sorter, IEnumerable<TEntity> filterableEntityQry = null)
-        //{
-        //    IEnumerable<TEntity> allData = filterableEntityQry == null ? await GetAllAsync() : filterableEntityQry;
+        public async Task<PaginationListEntityModel<TEntity>> GetAllPagedAsync<T>(int page, int pageSize, Expression<Func<TEntity, T>> sorter, IEnumerable<TEntity> filterableEntityQry = null)
+        {
+            IEnumerable<TEntity> allData = filterableEntityQry == null ? await GetAllAsync() : filterableEntityQry;
 
-        //    var dataCount = allData.Count();
-        //    var totalPages = Math.Ceiling((decimal)dataCount / pageSize);
+            var dataCount = allData.Count();
+            var totalPages = Math.Ceiling((decimal)dataCount / pageSize);
 
-        //    var orderedData = allData.AsQueryable().OrderBy(sorter);
+            var orderedData = allData.AsQueryable().OrderBy(sorter);
 
-        //    var pagedQuery = orderedData.Skip(page * pageSize).Take(pageSize).ToList();
+            var pagedQuery = orderedData.Skip(page * pageSize).Take(pageSize).ToList();
 
-        //    PaginationListEntityDTO<T> response = new PaginationListEntityDTO<T>();
+            PaginationListEntityModel<T> response = new PaginationListEntityModel<T>();
 
-        //    return new PaginationListEntityDTO<TEntity>()
-        //    {
-        //        PagedList = pagedQuery,
-        //        TotalPages = totalPages,
-        //        PageNumber = page,
-        //        TotalCount = dataCount,
-        //    };
+            return new PaginationListEntityModel<TEntity>()
+            {
+                PagedList = pagedQuery,
+                TotalPages = totalPages,
+                PageNumber = page,
+                TotalCount = dataCount,
+            };
 
-        //}
+        }
 
 
         public virtual async Task<TEntity> GetByIdAsync(Guid id)

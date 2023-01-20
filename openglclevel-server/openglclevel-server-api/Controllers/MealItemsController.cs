@@ -22,29 +22,25 @@ namespace openglclevel_server_api.Controllers
             _mealItemSC = mealSC;
         }
 
-        // GET: api/<MealItemsController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
         // GET api/<MealItemsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet()]
+        public async Task<IActionResult> Get(int page, int itemsPerPage, string searchTerm = "")
         {
-            return "value";
+            var userID = _utilities.GetUserIdFromRequestContext(HttpContext);
+            var items = await _mealItemSC.GetMealItems(userID, page, itemsPerPage, searchTerm);
+            return Ok(items);
         }
 
-        // POST api/<MealItemsController>
-        [HttpPost]
-        [Route("addMealItems")]
-        public async Task<IActionResult> Post([FromBody] List<NewMealItemModel> meals)
-        {
-            var userID =  _utilities.GetUserIdFromRequestContext(HttpContext);
-            var items =  await _mealItemSC.AddMealItemsFromUserID(userID, meals);
-            return Ok(items);
+        //// POST api/<MealItemsController>
+        //[HttpPost]
+        //[Route("addMealItems")]
+        //public async Task<IActionResult> Post([FromBody] List<NewMealItemModel> meals)
+        //{
+        //    var userID =  _utilities.GetUserIdFromRequestContext(HttpContext);
+        //    var items =  await _mealItemSC.AddMealItemsFromUserID(userID, meals);
+        //    return Ok(items);
            
-        }
+        //}
     }
 }

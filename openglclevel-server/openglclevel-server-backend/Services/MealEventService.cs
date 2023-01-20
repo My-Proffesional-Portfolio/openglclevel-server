@@ -1,8 +1,11 @@
 ﻿using openglclevel_server_data.DataAccess;
+using openglclevel_server_infrastructure.Repositories;
 using openglclevel_server_infrastructure.Repositories.Interfaces;
 using openglclevel_server_infrastructure.Services;
+using openglclevel_server_models.Pagination;
 using openglclevel_server_models.Requests.MealEventItems;
 using openglclevel_server_models.Requests.MealEvents;
+using openglclevel_server_models.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,5 +84,37 @@ namespace openglclevel_server_backend.Services
 
             return normalizedInputItems;
         }
+
+        public async Task<object> GetEvents(Guid userID, int page, int itemsPerPage, string searchTerm = null)
+        {
+            var mealEvents = _eventRepo.FindByExpresion(w => w.UserId == userID);
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                mealEvents = mealEvents.Where(w => w.Notes.Contains(searchTerm));
+            }
+
+            var data = await _eventRepo.GetAllPagedAsync(page, itemsPerPage,
+                sorter: (o => o.CreationDate), mealEvents);
+
+            var response = new PaginationListEntityModel<MealEventModel>();
+
+            response.TotalPages = data.TotalPages;
+            response.TotalCount = data.TotalCount;
+            response.PageNumber = data.PageNumber;
+            response.PagedList = new List<MealEventModel>();
+
+            response.PagedList = data.PagedList.Select(s => new MealEventModel
+            {
+               Id = s.Id,
+               EventDate = s.MealDate,
+               GlcLevel = s.GlcLevel,
+
+            }).ToList();
+
+            return response;
+        }
+
+
     }
 }

@@ -10,5 +10,6 @@ namespace openglclevel_server_infrastructure.Services
     public interface IMealEventService
     {
         public Task<Guid> AddMealEvent(Guid userID, NewMealEventModel mealEvent);
+        public Task<object> GetEvents(Guid userID, int page, int itemsPerPage, string searchTerm = null);
     }
 }

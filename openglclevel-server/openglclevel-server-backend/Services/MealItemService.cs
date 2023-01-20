@@ -1,6 +1,7 @@
 ﻿using openglclevel_server_data.DataAccess;
 using openglclevel_server_infrastructure.Repositories.Interfaces;
 using openglclevel_server_infrastructure.Services;
+using openglclevel_server_models.Pagination;
 using openglclevel_server_models.Requests.MealEventItems;
 using System;
 using System.Collections.Generic;
@@ -54,5 +55,35 @@ namespace openglclevel_server_backend.Services
             return new NewMealItemModelDB { ID = newMeal.Id, Name = newMeal.MealName};
 
         }
+    
+        public async Task<object> GetMealItems(Guid userID, int page, int itemsPerPage, string searchTerm = null)
+        {
+            var mealItems = _mealItemRepository.FindByExpresion(w => w.UserId == userID);
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                mealItems = mealItems.Where(w => w.MealName.Contains(searchTerm));
+            }
+
+            var data = await _mealItemRepository.GetAllPagedAsync(page, itemsPerPage,
+                sorter: (o => o.MealName), mealItems);
+
+            var response = new PaginationListEntityModel<NewMealItemModelDB>();
+
+            response.TotalPages = data.TotalPages;
+            response.TotalCount = data.TotalCount; 
+            response.PageNumber = data.PageNumber;
+            response.PagedList = new List<NewMealItemModelDB>();
+
+            response.PagedList = data.PagedList.Select(s => new NewMealItemModelDB
+            {
+                Name = s.MealName, 
+                ID = s.Id
+
+            }).ToList();
+
+            return response;
+        }
+    
     }
 }

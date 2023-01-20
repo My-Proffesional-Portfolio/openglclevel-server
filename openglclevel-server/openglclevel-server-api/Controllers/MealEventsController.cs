@@ -23,16 +23,11 @@ namespace openglclevel_server_api.Controllers
             _utilities = utilities;
         }
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get(int page, int itemsPerPage, string searchTerm = "")
         {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<MealEventsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
+            var userID = _utilities.GetUserIdFromRequestContext(HttpContext);
+            var result = await _eventSC.GetEvents(userID, page, itemsPerPage, searchTerm);
+            return Ok(result);
         }
 
         // POST api/<MealEventsController>

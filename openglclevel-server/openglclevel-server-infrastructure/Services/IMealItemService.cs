@@ -11,7 +11,7 @@ namespace openglclevel_server_infrastructure.Services
     {
         public Task<List<NewMealItemModel>> AddMealItemsFromUserID(Guid userID, List<NewMealItemModel> meals);
         public Task<NewMealItemModelDB> AddSingleMealItemToUser(Guid userID, NewMealItemModel meal);
-
+        public Task<object> GetMealItems(Guid userID, int page, int itemsPerPage, string searchTerm = null);
 
     }
 }
