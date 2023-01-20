@@ -51,9 +51,12 @@ namespace openglclevel_server_api
         {
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IMealItemService, MealItemService>();
+            services.AddTransient<IMealEventService, MealEventService>();
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IMealItemRepository, MealItemRepository>();
+            services.AddTransient<IMealEventRepository, MealEventRepository>();
+            services.AddTransient<IMealEventItemsRepository, MealEventItemsRepository>();
 
             services.AddTransient<EncryptorEngine>();
             services.AddTransient<DecryptorEngine>();

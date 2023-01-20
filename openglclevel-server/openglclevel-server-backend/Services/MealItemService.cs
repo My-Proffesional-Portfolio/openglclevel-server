@@ -36,5 +36,23 @@ namespace openglclevel_server_backend.Services
             return meals;
 
         }
+
+        public async Task<NewMealItemModelDB> AddSingleMealItemToUser(Guid userID, NewMealItemModel meal)
+        {
+            var mealItemsDB = new MealItem();
+
+            var newMeal = new MealItem
+            {
+                Id = Guid.NewGuid(),
+                MealName = meal.Name,
+                UserId = userID
+
+            };
+
+            await _mealItemRepository.AddAsync(newMeal);
+            _dbContext.SaveChanges();
+            return new NewMealItemModelDB { ID = newMeal.Id, Name = newMeal.MealName};
+
+        }
     }
 }

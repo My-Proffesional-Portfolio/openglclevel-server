@@ -10,5 +10,8 @@ namespace openglclevel_server_infrastructure.Services
     public interface IMealItemService
     {
         public Task<List<NewMealItemModel>> AddMealItemsFromUserID(Guid userID, List<NewMealItemModel> meals);
+        public Task<NewMealItemModelDB> AddSingleMealItemToUser(Guid userID, NewMealItemModel meal);
+
+
     }
 }
