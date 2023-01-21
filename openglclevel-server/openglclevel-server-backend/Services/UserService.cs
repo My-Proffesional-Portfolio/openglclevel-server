@@ -1,4 +1,5 @@
-﻿using openglclevel_server_data.DataAccess;
+﻿using Microsoft.AspNetCore.Http;
+using openglclevel_server_data.DataAccess;
 using openglclevel_server_infrastructure.Repositories.Interfaces;
 using openglclevel_server_infrastructure.Services;
 using openglclevel_server_models.API.Security;
@@ -7,6 +8,7 @@ using openglclevel_server_models.Security;
 using openglclevel_server_security.Decryptor;
 using openglclevel_server_security.Encryptor;
 using openglclevel_server_security.TokenManager;
+using Microsoft.AspNetCore.Http.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +26,10 @@ namespace openglclevel_server_backend.Services
         private readonly TokenHandlerEngine _tokenHandler;
         private readonly IUserRepository _userRepository;
         private readonly OpenglclevelContext _dbContext;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         public UserService(ISecurityKeys securityKeysValues, OpenglclevelContext dbContext,
             EncryptorEngine encryptor, IUserRepository userRepository, DecryptorEngine decryptor,
-            TokenHandlerEngine tokenHandler)
+            TokenHandlerEngine tokenHandler, IHttpContextAccessor httpContextAccessor)
         {
             _securityKeysValues = securityKeysValues;
             _encryptor = encryptor;
@@ -34,6 +37,7 @@ namespace openglclevel_server_backend.Services
             _tokenHandler = tokenHandler;
             _userRepository = userRepository;
             _dbContext = dbContext;
+            _httpContextAccessor = httpContextAccessor;
 
         }
 
@@ -56,6 +60,8 @@ namespace openglclevel_server_backend.Services
             };
 
             var tokenData = _tokenHandler.GenerateToken(tokenClaims);
+            //https://github.com/dotnet/AspNetCore.Docs/issues/7076
+            _httpContextAccessor.HttpContext.Session.SetString("userID", user.Id.ToString());
             return tokenData;
 
         }

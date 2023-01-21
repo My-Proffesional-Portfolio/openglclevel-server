@@ -1,4 +1,5 @@
-﻿using openglclevel_server_data.DataAccess;
+﻿using Microsoft.AspNetCore.Http;
+using openglclevel_server_data.DataAccess;
 using openglclevel_server_infrastructure.Repositories;
 using openglclevel_server_infrastructure.Repositories.Interfaces;
 using openglclevel_server_infrastructure.Services;
@@ -20,17 +21,21 @@ namespace openglclevel_server_backend.Services
         private readonly IMealEventItemsRepository _eventItemRepo;
         private readonly IMealEventRepository _eventRepo;
         private readonly OpenglclevelContext _dbContext;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         public MealEventService(IMealItemService mealItemSC, IMealEventItemsRepository eventItemRepo, 
-            IMealEventRepository eventRepo, OpenglclevelContext dbContext )
+            IMealEventRepository eventRepo, OpenglclevelContext dbContext, IHttpContextAccessor httpContextAccessor  )
         {
             _mealItemSC = mealItemSC;
             _eventItemRepo = eventItemRepo;
             _eventRepo = eventRepo;
             _dbContext = dbContext;
+            _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<Guid> AddMealEvent(Guid userID, NewMealEventModel mealEvent)
+        public async Task<Guid> AddMealEvent(NewMealEventModel mealEvent)
         {
+
+            var userID = Guid.Parse(_httpContextAccessor.HttpContext.Session.GetString("userID"));
             List<ExistingMealItemPair> normalizedInputItems = await AddNewMealItemsForEvent(userID, mealEvent);
 
             mealEvent.ItemMeals = mealEvent.ItemMeals.Union(normalizedInputItems).ToList();
@@ -85,8 +90,9 @@ namespace openglclevel_server_backend.Services
             return normalizedInputItems;
         }
 
-        public async Task<object> GetEvents(Guid userID, int page, int itemsPerPage, string searchTerm = null)
+        public async Task<object> GetEvents(int page, int itemsPerPage, string searchTerm = null)
         {
+            var userID = Guid.Parse(_httpContextAccessor.HttpContext.Session.GetString("userID"));
             var mealEvents = _eventRepo.FindByExpresion(w => w.UserId == userID);
 
             if (!string.IsNullOrWhiteSpace(searchTerm))

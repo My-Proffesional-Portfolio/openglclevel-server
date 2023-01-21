@@ -25,8 +25,7 @@ namespace openglclevel_server_api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(int page, int itemsPerPage, string searchTerm = "")
         {
-            var userID = _utilities.GetUserIdFromRequestContext(HttpContext);
-            var result = await _eventSC.GetEvents(userID, page, itemsPerPage, searchTerm);
+            var result = await _eventSC.GetEvents(page, itemsPerPage, searchTerm);
             return Ok(result);
         }
 
@@ -34,8 +33,7 @@ namespace openglclevel_server_api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] NewMealEventModel newEvent)
         {
-            var userID = _utilities.GetUserIdFromRequestContext(HttpContext);
-            var result = await _eventSC.AddMealEvent(userID, newEvent);
+            var result = await _eventSC.AddMealEvent(newEvent);
             return Ok(result);
         }
 

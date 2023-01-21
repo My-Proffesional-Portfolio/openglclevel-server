@@ -1,4 +1,5 @@
-﻿using openglclevel_server_data.DataAccess;
+﻿using Microsoft.AspNetCore.Http;
+using openglclevel_server_data.DataAccess;
 using openglclevel_server_infrastructure.Repositories.Interfaces;
 using openglclevel_server_infrastructure.Services;
 using openglclevel_server_models.Pagination;
@@ -15,10 +16,13 @@ namespace openglclevel_server_backend.Services
     {
         private readonly IMealItemRepository _mealItemRepository;
         private readonly OpenglclevelContext _dbContext;
-        public MealItemService(IMealItemRepository mealItemRepository, OpenglclevelContext dbContext)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public MealItemService(IMealItemRepository mealItemRepository, OpenglclevelContext dbContext,
+            IHttpContextAccessor httpContextAccessor)
         {
             _mealItemRepository = mealItemRepository;
-            _dbContext = dbContext; 
+            _dbContext = dbContext;
+            _httpContextAccessor = httpContextAccessor;
         }
         public async Task<List<NewMealItemModel>> AddMealItemsFromUserID(Guid userID, List<NewMealItemModel> meals)
         {
