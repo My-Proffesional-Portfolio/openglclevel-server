@@ -51,7 +51,7 @@ namespace openglclevel_server_backend.Services
             var decryptedSystemPassword = await _decryptor.Decrypt(user.HashedPassword, user.Salt);
 
             if (decryptedSystemPassword.PlainPassword != password)
-                throw new Exception("Provided password is wrong ");
+                throw new Exception("Provided password is wrong, try again");
 
             var tokenClaims = new List<KeyValuePair<string, string>>
             {
