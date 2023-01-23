@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using openglclevel_server_models.Exceptions;
 
 namespace openglclevel_server_backend.Services
 {
@@ -46,12 +47,12 @@ namespace openglclevel_server_backend.Services
             var user = _userRepository.FindByExpresion(u => u.UserName == userName).FirstOrDefault();
 
             if (user == null)
-                throw new Exception("User not found in system ");
+                throw new FriendlyException("User not found in system ");
 
             var decryptedSystemPassword = await _decryptor.Decrypt(user.HashedPassword, user.Salt);
 
             if (decryptedSystemPassword.PlainPassword != password)
-                throw new Exception("Provided password is wrong, try again");
+                throw new FriendlyException("Provided password is wrong, try again");
 
             var tokenClaims = new List<KeyValuePair<string, string>>
             {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using openglclevel_server_api.Filters;
 using openglclevel_server_infrastructure.Services;
 using openglclevel_server_models.API.Security;
 using openglclevel_server_models.Requests.Accounts;
@@ -24,6 +25,7 @@ namespace openglclevel_server_api.Controllers
 
         [HttpGet]
         [Route("login")]
+        [AutomaticExceptionHandler]
         public async Task<IActionResult> login(string userName, string password)
         {
             var result = await _userSC.Login(userName, password);
