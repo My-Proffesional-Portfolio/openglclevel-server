@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using openglclevel_server_data.DataAccess;
 using openglclevel_server_infrastructure.Repositories;
 using openglclevel_server_infrastructure.Repositories.Interfaces;
@@ -22,14 +23,17 @@ namespace openglclevel_server_backend.Services
         private readonly IMealEventRepository _eventRepo;
         private readonly OpenglclevelContext _dbContext;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IUserRepository _userRepository;
         public MealEventService(IMealItemService mealItemSC, IMealEventItemsRepository eventItemRepo, 
-            IMealEventRepository eventRepo, OpenglclevelContext dbContext, IHttpContextAccessor httpContextAccessor  )
+            IMealEventRepository eventRepo, OpenglclevelContext dbContext, IHttpContextAccessor httpContextAccessor,
+            IUserRepository userRepository)
         {
             _mealItemSC = mealItemSC;
             _eventItemRepo = eventItemRepo;
             _eventRepo = eventRepo;
             _dbContext = dbContext;
             _httpContextAccessor = httpContextAccessor;
+            _userRepository = userRepository;
         }
 
         public async Task<Guid> AddMealEvent(NewMealEventModel mealEvent)
@@ -121,6 +125,28 @@ namespace openglclevel_server_backend.Services
             return response;
         }
 
+        public async Task<UserMetricsModel> GetEventsGlcAverage()
+        {
+
+            var result =  new UserMetricsModel();
+            var userID = Guid.Parse(_httpContextAccessor.HttpContext.Session.GetString("userID"));
+            var mealEvents = _eventRepo.FindByExpresion(w => w.UserId == userID);
+            var average = mealEvents.Count() > 0 ? (decimal) await mealEvents.AverageAsync(a => a.GlcLevel) : 0m;
+
+            result.GlcAverage = average;
+            var lastEvent =  await mealEvents.OrderByDescending(o => o.CreationDate).FirstOrDefaultAsync();
+
+            if (lastEvent != null)
+                result.lastEventRegistered = lastEvent.MealDate;
+
+            result.EventNumbers = await mealEvents.CountAsync();
+
+            var user = await _userRepository.GetByIdAsync(userID);
+            result.UserName = user.Name + " " + user.FirstName + " ("+ user.UserName+ ")";
+
+            return result;
+
+        }
 
     }
 }

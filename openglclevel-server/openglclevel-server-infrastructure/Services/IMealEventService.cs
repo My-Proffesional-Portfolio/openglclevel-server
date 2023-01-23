@@ -1,4 +1,5 @@
 ﻿using openglclevel_server_models.Requests.MealEvents;
+using openglclevel_server_models.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace openglclevel_server_infrastructure.Services
     {
         public Task<Guid> AddMealEvent(NewMealEventModel mealEvent);
         public Task<object> GetEvents(int page, int itemsPerPage, string searchTerm = null);
+        public Task<UserMetricsModel> GetEventsGlcAverage();
     }
 }

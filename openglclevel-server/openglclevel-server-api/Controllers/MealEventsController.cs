@@ -29,6 +29,14 @@ namespace openglclevel_server_api.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        [Route("userEventMetrics")]
+        public async Task<IActionResult> GetEventsGlcAverage()
+        {
+            var result = await _eventSC.GetEventsGlcAverage();
+            return Ok(result);
+        }
+
         // POST api/<MealEventsController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] NewMealEventModel newEvent)
