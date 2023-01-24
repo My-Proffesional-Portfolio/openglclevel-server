@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using openglclevel_server_api.Filters;
 using openglclevel_server_api.UtilControllers;
 using openglclevel_server_infrastructure.Services;
 using openglclevel_server_models.Requests.MealEventItems;
@@ -31,6 +32,7 @@ namespace openglclevel_server_api.Controllers
 
         [HttpGet]
         [Route("userEventMetrics")]
+        [AutomaticExceptionHandler]
         public async Task<IActionResult> GetEventsGlcAverage()
         {
             var result = await _eventSC.GetEventsGlcAverage();
