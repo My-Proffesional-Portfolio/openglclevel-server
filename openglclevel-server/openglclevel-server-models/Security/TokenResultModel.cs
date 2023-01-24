@@ -9,5 +9,6 @@ namespace openglclevel_server_models.Security
     public class TokenResultModel
     {
         public string Token { get; set; }
+        public Guid UserID { get; set; }
     }
 }

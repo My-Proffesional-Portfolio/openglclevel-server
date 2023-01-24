@@ -142,7 +142,8 @@ namespace openglclevel_server_backend.Services
             result.EventNumbers = await mealEvents.CountAsync();
 
             var user = await _userRepository.GetByIdAsync(userID);
-            result.UserName = user.Name + " " + user.FirstName + " ("+ user.UserName+ ")";
+            result.UserName = user.UserName;
+            result.Name = user.Name + " " + user.FirstName;
 
             return result;
 

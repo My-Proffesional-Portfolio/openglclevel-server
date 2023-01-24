@@ -21,7 +21,7 @@ namespace openglclevel_server_security.TokenManager
         }
 
 
-        public TokenResultModel GenerateToken(List<KeyValuePair<string, string>> tokenInfo)
+        public TokenResultModel GenerateToken(List<KeyValuePair<string, string>> tokenInfo, Guid userID)
         {
             var permClaims = new List<Claim>();
 
@@ -48,7 +48,7 @@ namespace openglclevel_server_security.TokenManager
             //TODO: get time from token object
             //expiration = !generateSpecialToken ? DateTime.Now.AddMinutes(60) : DateTime.Now.AddSeconds(30);
 
-            return new TokenResultModel { Token = new JwtSecurityTokenHandler().WriteToken(token) };
+            return new TokenResultModel { Token = new JwtSecurityTokenHandler().WriteToken(token), UserID = userID };
 
         }
 

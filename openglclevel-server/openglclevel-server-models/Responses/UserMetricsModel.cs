@@ -12,5 +12,6 @@ namespace openglclevel_server_models.Responses
         public int EventNumbers { get; set; }
         public DateTime? lastEventRegistered { get; set; }
         public decimal GlcAverage { get; set; }
+        public string Name { get; set; }
     }
 }

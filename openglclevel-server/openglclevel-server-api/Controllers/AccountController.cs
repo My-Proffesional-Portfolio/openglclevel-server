@@ -16,11 +16,13 @@ namespace openglclevel_server_api.Controllers
 
         private readonly IUserService _userSC;
         private readonly ISecurityKeys _securityKeysValues;
+        private readonly IHttpContextAccessor _httpContext;
 
-        public AccountController(IUserService userSC, ISecurityKeys securityKeys)
+        public AccountController(IUserService userSC, ISecurityKeys securityKeys, IHttpContextAccessor httpContext)
         {
             _userSC = userSC;
             _securityKeysValues = securityKeys;
+            _httpContext = httpContext;
         }
 
         [HttpGet]
@@ -29,6 +31,7 @@ namespace openglclevel_server_api.Controllers
         public async Task<IActionResult> login(string userName, string password)
         {
             var result = await _userSC.Login(userName, password);
+            _httpContext.HttpContext.Session.SetString("userID", result.UserID.ToString());
             return Ok(result);
         }
 

@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using openglclevel_server_models.Exceptions;
+using openglclevel_server_api;
 
 namespace openglclevel_server_backend.Services
 {
@@ -60,9 +61,10 @@ namespace openglclevel_server_backend.Services
                 new KeyValuePair<string, string>("userName", user.Name)
             };
 
-            var tokenData = _tokenHandler.GenerateToken(tokenClaims);
+            var tokenData = _tokenHandler.GenerateToken(tokenClaims, user.Id);
             //https://github.com/dotnet/AspNetCore.Docs/issues/7076
-            _httpContextAccessor.HttpContext.Session.SetString("userID", user.Id.ToString());
+            //_httpContextAccessor.HttpContext.Session.SetObject("userID", user.Id.ToString());
+
             return tokenData;
 
         }
