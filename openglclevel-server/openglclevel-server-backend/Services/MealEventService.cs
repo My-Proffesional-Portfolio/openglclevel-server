@@ -4,6 +4,7 @@ using openglclevel_server_data.DataAccess;
 using openglclevel_server_infrastructure.Repositories;
 using openglclevel_server_infrastructure.Repositories.Interfaces;
 using openglclevel_server_infrastructure.Services;
+using openglclevel_server_models;
 using openglclevel_server_models.Exceptions;
 using openglclevel_server_models.Pagination;
 using openglclevel_server_models.Requests.MealEventItems;
@@ -133,7 +134,8 @@ namespace openglclevel_server_backend.Services
 
             try
             {
-                var userID = Guid.Parse(_httpContextAccessor.HttpContext.Session.GetString("userID"));
+                //var userID = Guid.Parse(_httpContextAccessor.HttpContext.Session.GetString("userID"));
+                var userID = StaticMemoryVariables.UserID;
                 var mealEvents = _eventRepo.FindByExpresion(w => w.UserId == userID);
                 var average = mealEvents.Count() > 0 ? (decimal)await mealEvents.AverageAsync(a => a.GlcLevel) : 0m;
 

@@ -52,7 +52,7 @@ namespace openglclevel_server_security.TokenManager
 
         }
 
-        public JwtSecurityToken GetTokenDataByStringValue(string rawToken)
+        public static JwtSecurityToken GetTokenDataByStringValue(string rawToken)
         {
             var token = rawToken;
             var handler = new JwtSecurityTokenHandler();

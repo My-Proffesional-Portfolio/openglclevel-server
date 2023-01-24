@@ -27,9 +27,10 @@ namespace openglclevel_server_api.Controllers
         [HttpGet()]
         public async Task<IActionResult> Get(int page, int itemsPerPage, string searchTerm = "")
         {
-            var userID = _utilities.GetUserIdFromRequestContext(HttpContext);
-            var items = await _mealItemSC.GetMealItems(userID, page, itemsPerPage, searchTerm);
-            return Ok(items);
+            //var userID = _utilities.GetUserIdFromRequestContext(HttpContext);
+            //var items = await _mealItemSC.GetMealItems(userID, page, itemsPerPage, searchTerm);
+            //return Ok(items);
+            return Ok();
         }
 
         //// POST api/<MealItemsController>

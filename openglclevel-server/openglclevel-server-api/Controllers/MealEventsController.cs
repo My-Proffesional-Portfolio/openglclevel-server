@@ -33,6 +33,7 @@ namespace openglclevel_server_api.Controllers
         [HttpGet]
         [Route("userEventMetrics")]
         [AutomaticExceptionHandler]
+        [UserActionFilter]
         public async Task<IActionResult> GetEventsGlcAverage()
         {
             var result = await _eventSC.GetEventsGlcAverage();

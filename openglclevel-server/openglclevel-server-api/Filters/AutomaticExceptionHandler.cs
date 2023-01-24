@@ -18,7 +18,10 @@ namespace openglclevel_server_api.Filters
                     statusCode = HttpStatusCode.NotFound;
                     break;
 
-              
+                case UserSessionException:
+                    statusCode = HttpStatusCode.Conflict;
+                    break;
+
                 default:
                     statusCode = HttpStatusCode.InternalServerError;
                     break;

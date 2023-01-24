@@ -1,4 +1,5 @@
 ﻿using openglclevel_server_security.TokenManager;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace openglclevel_server_api.UtilControllers
 {
@@ -10,7 +11,7 @@ namespace openglclevel_server_api.UtilControllers
             _tokenHandler = tokenHandler;
         }
 
-        public string GetTokenFromContextRequest(HttpContext context)
+        public  static string GetTokenFromContextRequest(HttpContext context)
         {
             var tokenHeader = context.Request.Headers["Authorization"];
             var bearerToken = tokenHeader.FirstOrDefault();
@@ -19,15 +20,16 @@ namespace openglclevel_server_api.UtilControllers
             return token;
         }
 
-        public Guid GetUserIdFromRequestContext(HttpContext context)
+        public static Guid GetUserIdFromRequestContext(HttpContext context)
         {
 
             string bearerToken = GetTokenFromContextRequest(context);
-            var tokenDecoded = _tokenHandler.GetTokenDataByStringValue(bearerToken);
+            var tokenDecoded = TokenHandlerEngine.GetTokenDataByStringValue(bearerToken);
 
             var userID = tokenDecoded.Claims.Where(W => W.Type == "userID").FirstOrDefault().Value;
             return Guid.Parse(userID.ToUpper());
         }
+
 
     }
 }
