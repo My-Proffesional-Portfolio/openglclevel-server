@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using openglclevel_server_api.Filters;
 using openglclevel_server_api.UtilControllers;
 using openglclevel_server_infrastructure.Services;
+using openglclevel_server_models.API;
 using openglclevel_server_models.Requests.MealEventItems;
 using openglclevel_server_models.Requests.MealEvents;
 
@@ -27,6 +28,14 @@ namespace openglclevel_server_api.Controllers
         public async Task<IActionResult> Get(int page, int itemsPerPage, string searchTerm = "")
         {
             var result = await _eventSC.GetEvents(page, itemsPerPage, searchTerm);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("getEventMealTypes")]
+        public IActionResult GetEventMealTypes()
+        {
+            var result =  MealTypes.GetMealTypesDefinition();
             return Ok(result);
         }
 
