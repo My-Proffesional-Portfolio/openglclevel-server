@@ -35,6 +35,7 @@ namespace openglclevel_server_api.Controllers
 
         [HttpGet]
         [Route("getEventMealTypes")]
+        [AutomaticExceptionHandler]
         public IActionResult GetEventMealTypes()
         {
             var result =  MealTypes.GetMealTypesDefinition();

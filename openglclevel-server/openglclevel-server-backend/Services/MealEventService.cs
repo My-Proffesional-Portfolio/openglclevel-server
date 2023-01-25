@@ -41,7 +41,8 @@ namespace openglclevel_server_backend.Services
         public async Task<Guid> AddMealEvent(NewMealEventModel mealEvent)
         {
 
-            var userID = Guid.Parse(_httpContextAccessor.HttpContext.Session.GetString("userID"));
+            //var userID = Guid.Parse(_httpContextAccessor.HttpContext.Session.GetString("userID"));
+            var userID = StaticMemoryVariables.UserID;
             List<ExistingMealItemPair> normalizedInputItems = await AddNewMealItemsForEvent(userID, mealEvent);
 
             mealEvent.ItemMeals = mealEvent.ItemMeals.Union(normalizedInputItems).ToList();
@@ -68,6 +69,7 @@ namespace openglclevel_server_backend.Services
                     MealItemId = fe.ID
                 });
             });
+
 
             await _eventItemRepo.AddRangeAsync(mealEventItems);
             await _eventRepo.AddAsync(newMealEventDB);
@@ -96,9 +98,9 @@ namespace openglclevel_server_backend.Services
             return normalizedInputItems;
         }
 
-        public async Task<object> GetEvents(int page, int itemsPerPage, string searchTerm = null)
+        public async Task<PaginationListEntityModel<MealEventModel>> GetEvents(int page, int itemsPerPage, string searchTerm = null)
         {
-            var userID = Guid.Parse(_httpContextAccessor.HttpContext.Session.GetString("userID"));
+            var userID = StaticMemoryVariables.UserID;
             var mealEvents = _eventRepo.FindByExpresion(w => w.UserId == userID);
 
             if (!string.IsNullOrWhiteSpace(searchTerm))
@@ -121,6 +123,7 @@ namespace openglclevel_server_backend.Services
                Id = s.Id,
                EventDate = s.MealDate,
                GlcLevel = s.GlcLevel,
+               Pospandrial = s.Notes == "Postprandial",
 
             }).ToList();
 

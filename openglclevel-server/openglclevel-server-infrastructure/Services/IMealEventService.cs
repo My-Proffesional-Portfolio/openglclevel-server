@@ -1,4 +1,5 @@
-﻿using openglclevel_server_models.Requests.MealEvents;
+﻿using openglclevel_server_models.Pagination;
+using openglclevel_server_models.Requests.MealEvents;
 using openglclevel_server_models.Responses;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace openglclevel_server_infrastructure.Services
     public interface IMealEventService
     {
         public Task<Guid> AddMealEvent(NewMealEventModel mealEvent);
-        public Task<object> GetEvents(int page, int itemsPerPage, string searchTerm = null);
+        public Task<PaginationListEntityModel<MealEventModel>> GetEvents(int page, int itemsPerPage, string searchTerm = null);
         public Task<UserMetricsModel> GetEventsGlcAverage();
     }
 }

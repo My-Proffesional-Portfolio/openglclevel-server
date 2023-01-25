@@ -2,6 +2,7 @@
 using openglclevel_server_data.DataAccess;
 using openglclevel_server_infrastructure.Repositories.Interfaces;
 using openglclevel_server_infrastructure.Services;
+using openglclevel_server_models;
 using openglclevel_server_models.Pagination;
 using openglclevel_server_models.Requests.MealEventItems;
 using System;
@@ -24,8 +25,9 @@ namespace openglclevel_server_backend.Services
             _dbContext = dbContext;
             _httpContextAccessor = httpContextAccessor;
         }
-        public async Task<List<NewMealItemModel>> AddMealItemsFromUserID(Guid userID, List<NewMealItemModel> meals)
+        public async Task<List<NewMealItemModel>> AddMealItemsFromUserID(List<NewMealItemModel> meals)
         {
+            var userID = StaticMemoryVariables.UserID;
             var mealItemsDB = new List<MealItem>();
 
             meals.ForEach(fe => mealItemsDB.Add(new MealItem
@@ -60,8 +62,10 @@ namespace openglclevel_server_backend.Services
 
         }
     
-        public async Task<object> GetMealItems(Guid userID, int page, int itemsPerPage, string searchTerm = null)
+        public async Task<PaginationListEntityModel<NewMealItemModelDB>> GetMealItems(int page, int itemsPerPage, string searchTerm = null)
         {
+
+            var userID = StaticMemoryVariables.UserID;
             var mealItems = _mealItemRepository.FindByExpresion(w => w.UserId == userID);
 
             if (!string.IsNullOrWhiteSpace(searchTerm))
@@ -82,7 +86,8 @@ namespace openglclevel_server_backend.Services
             response.PagedList = data.PagedList.Select(s => new NewMealItemModelDB
             {
                 Name = s.MealName, 
-                ID = s.Id
+                ID = s.Id,
+                Quantity = 1
 
             }).ToList();
 
