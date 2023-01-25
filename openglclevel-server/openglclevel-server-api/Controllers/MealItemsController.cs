@@ -24,13 +24,11 @@ namespace openglclevel_server_api.Controllers
 
 
         // GET api/<MealItemsController>/5
-        [HttpGet()]
+        [HttpGet]
         public async Task<IActionResult> Get(int page, int itemsPerPage, string searchTerm = "")
         {
-            //var userID = _utilities.GetUserIdFromRequestContext(HttpContext);
-            //var items = await _mealItemSC.GetMealItems(userID, page, itemsPerPage, searchTerm);
-            //return Ok(items);
-            return Ok();
+            var items = await _mealItemSC.GetMealItems( page, itemsPerPage, searchTerm);
+            return Ok(items);
         }
 
         //// POST api/<MealItemsController>

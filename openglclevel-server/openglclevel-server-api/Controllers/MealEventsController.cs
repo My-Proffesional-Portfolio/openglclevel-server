@@ -25,6 +25,8 @@ namespace openglclevel_server_api.Controllers
             _utilities = utilities;
         }
         [HttpGet]
+        [AutomaticExceptionHandler]
+        [UserActionFilter]
         public async Task<IActionResult> Get(int page, int itemsPerPage, string searchTerm = "")
         {
             var result = await _eventSC.GetEvents(page, itemsPerPage, searchTerm);
@@ -51,6 +53,8 @@ namespace openglclevel_server_api.Controllers
 
         // POST api/<MealEventsController>
         [HttpPost]
+        [AutomaticExceptionHandler]
+        [UserActionFilter]
         public async Task<IActionResult> Post([FromBody] NewMealEventModel newEvent)
         {
             var result = await _eventSC.AddMealEvent(newEvent);

@@ -15,5 +15,6 @@ namespace openglclevel_server_models.Requests.MealEventItems
     {
         public string Name { get; set; }
         public Guid  ID { get; set; }
+        public int Quantity { get; set; }
     }
 }

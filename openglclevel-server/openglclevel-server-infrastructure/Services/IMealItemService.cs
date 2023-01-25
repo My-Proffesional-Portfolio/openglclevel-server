@@ -1,4 +1,5 @@
-﻿using openglclevel_server_models.Requests.MealEventItems;
+﻿using openglclevel_server_models.Pagination;
+using openglclevel_server_models.Requests.MealEventItems;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace openglclevel_server_infrastructure.Services
 {
     public interface IMealItemService
     {
-        public Task<List<NewMealItemModel>> AddMealItemsFromUserID(Guid userID, List<NewMealItemModel> meals);
+        public Task<List<NewMealItemModel>> AddMealItemsFromUserID(List<NewMealItemModel> meals);
         public Task<NewMealItemModelDB> AddSingleMealItemToUser(Guid userID, NewMealItemModel meal);
-        public Task<object> GetMealItems(Guid userID, int page, int itemsPerPage, string searchTerm = null);
+        public Task<PaginationListEntityModel<NewMealItemModelDB>> GetMealItems(int page, int itemsPerPage, string searchTerm = null);
 
     }
 }
