@@ -5,6 +5,7 @@ using openglclevel_server_infrastructure.Repositories;
 using openglclevel_server_infrastructure.Repositories.Interfaces;
 using openglclevel_server_infrastructure.Services;
 using openglclevel_server_models;
+using openglclevel_server_models.API;
 using openglclevel_server_models.Exceptions;
 using openglclevel_server_models.Pagination;
 using openglclevel_server_models.Requests.MealEventItems;
@@ -26,7 +27,7 @@ namespace openglclevel_server_backend.Services
         private readonly OpenglclevelContext _dbContext;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUserRepository _userRepository;
-        public MealEventService(IMealItemService mealItemSC, IMealEventItemsRepository eventItemRepo, 
+        public MealEventService(IMealItemService mealItemSC, IMealEventItemsRepository eventItemRepo,
             IMealEventRepository eventRepo, OpenglclevelContext dbContext, IHttpContextAccessor httpContextAccessor,
             IUserRepository userRepository)
         {
@@ -48,7 +49,7 @@ namespace openglclevel_server_backend.Services
             mealEvent.ItemMeals = mealEvent.ItemMeals.Union(normalizedInputItems).ToList();
 
             var newMealEventDB = new MealEvent();
-            newMealEventDB.MealAtDay = mealEvent.MealType.ToString();
+            newMealEventDB.MealAtDay =  MealTypes.GetMealTypesDefinition().FirstOrDefault(f=> f.Type == mealEvent.MealType).Name;
             newMealEventDB.MealDate = mealEvent.EventDate;
             newMealEventDB.CreationDate = DateTime.Now;
             newMealEventDB.GlcLevel = mealEvent.GlcLevel;
@@ -63,8 +64,8 @@ namespace openglclevel_server_backend.Services
                 mealEventItems.Add(new MealEventItem()
                 {
                     Id = Guid.NewGuid(),
-                    MealEventId = newMealEventDB.Id, 
-                    Description = "", 
+                    MealEventId = newMealEventDB.Id,
+                    Description = "",
                     Unit = fe.Quantity,
                     MealItemId = fe.ID
                 });
@@ -120,10 +121,10 @@ namespace openglclevel_server_backend.Services
 
             response.PagedList = data.PagedList.Select(s => new MealEventModel
             {
-               Id = s.Id,
-               EventDate = s.MealDate,
-               GlcLevel = s.GlcLevel,
-               Pospandrial = s.Notes == "Postprandial",
+                Id = s.Id,
+                EventDate = s.MealDate,
+                GlcLevel = s.GlcLevel,
+                Pospandrial = s.Notes == "Postprandial",
 
             }).ToList();
 
@@ -133,7 +134,7 @@ namespace openglclevel_server_backend.Services
         public async Task<UserMetricsModel> GetEventsGlcAverage()
         {
 
-            var result =  new UserMetricsModel();
+            var result = new UserMetricsModel();
 
             try
             {
@@ -154,15 +155,36 @@ namespace openglclevel_server_backend.Services
                 result.UserName = user.UserName;
                 result.Name = user.Name + " " + user.FirstName;
             }
-            catch (Exception ex){
+            catch (Exception ex)
+            {
 
                 throw new FriendlyException("Error aqui: -> " + ex.Message);
             }
-            
+
 
             return result;
 
         }
 
+        public MealEventDedtailsModel GetMealEventDetails(Guid eventId)
+        {
+            var result = new MealEventDedtailsModel();
+            var mealEvent = _eventRepo.FindByExpresion(f => f.Id == eventId).Include(i => i.MealEventItems).ThenInclude(thi=> thi.MealItem).FirstOrDefault();
+
+            result.GlcLevel = mealEvent.GlcLevel;
+            result.Id = mealEvent.Id;
+            result.EventDate = mealEvent.MealDate;
+            result.Pospandrial = mealEvent.Notes == "Postprandial";
+            result.MealTypeText = mealEvent.MealAtDay;
+            result.MealList = mealEvent.MealEventItems
+                .Select(s => new EventMealItemsModel()
+                {
+                    MealID = s.MealItem.Id,
+                    MealName = s.MealItem.MealName,
+                    Quantity = s.Unit,
+                }).ToList();
+
+            return result;
+        }
     }
 }

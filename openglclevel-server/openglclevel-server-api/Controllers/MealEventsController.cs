@@ -33,6 +33,13 @@ namespace openglclevel_server_api.Controllers
             return Ok(result);
         }
 
+        [HttpGet("id")]
+        public IActionResult Get(Guid eventId)
+        {
+            var eventDetail =  _eventSC.GetMealEventDetails(eventId);
+            return Ok(eventDetail);
+        }
+
         [HttpGet]
         [Route("getEventMealTypes")]
         [AutomaticExceptionHandler]

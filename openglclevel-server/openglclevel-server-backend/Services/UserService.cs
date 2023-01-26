@@ -74,7 +74,7 @@ namespace openglclevel_server_backend.Services
             var preExistedUser = _userRepository.FindByExpresion(u => u.UserName == newRegister.UserName).FirstOrDefault();
 
             if (preExistedUser != null)
-                throw new Exception("User already exist on system ");
+                throw new FriendlyException("User already exist on system ");
 
             var encryptedPassword = await _encryptor.PasswordEncrypt(newRegister.Password);
 
@@ -84,7 +84,7 @@ namespace openglclevel_server_backend.Services
                 HashedPassword = encryptedPassword.PasswordHash,
                 Salt = encryptedPassword.SaltValue,
                 Email = newRegister.Email,
-                FirstName = newRegister.FistName,
+                FirstName = newRegister.FirstName,
                 Name = newRegister.Name,
                 UserName = newRegister.UserName,
 

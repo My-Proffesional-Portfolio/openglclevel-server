@@ -12,6 +12,6 @@ namespace openglclevel_server_models.Requests.Accounts
         public string Password { get; set; } 
         public string Email { get; set; }
         public string Name { get; set; }
-        public string FistName { get; set; }
+        public string FirstName { get; set; }
     }
 }
