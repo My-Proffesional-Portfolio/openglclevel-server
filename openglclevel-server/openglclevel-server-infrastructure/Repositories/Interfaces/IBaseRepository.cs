@@ -16,7 +16,7 @@ namespace openglclevel_server_infrastructure.Repositories.Interfaces
         public void DeleteRangeAsync(IEnumerable<TEntity> entities);
         public IQueryable<TEntity> FindByExpresion(Expression<Func<TEntity, bool>> expression);
         public Task<IEnumerable<TEntity>> GetAllAsync();
-        Task<PaginationListEntityModel<TEntity>> GetAllPagedAsync<T>(int page, int pageSize, Expression<Func<TEntity, T>> sorter, IEnumerable<TEntity> filterableEntityQry = null);
+        Task<PaginationListEntityModel<TEntity>> GetAllPagedAsync<T>(int page, int pageSize, Expression<Func<TEntity, T>> sorter, IEnumerable<TEntity> filterableEntityQry = null, bool orderByDesc = false);
         public Task<TEntity> GetByIdAsync(Guid id);
         public void UpdateAsync(TEntity entity);
 

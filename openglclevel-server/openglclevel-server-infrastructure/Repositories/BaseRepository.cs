@@ -51,14 +51,14 @@ namespace openglclevel_server_infrastructure.Repositories
             return await _dbContext.Set<TEntity>().ToListAsync();
         }
 
-        public async Task<PaginationListEntityModel<TEntity>> GetAllPagedAsync<T>(int page, int pageSize, Expression<Func<TEntity, T>> sorter, IEnumerable<TEntity> filterableEntityQry = null)
+        public async Task<PaginationListEntityModel<TEntity>> GetAllPagedAsync<T>(int page, int pageSize, Expression<Func<TEntity, T>> sorter, IEnumerable<TEntity> filterableEntityQry = null, bool orderByDesc = false)
         {
             IEnumerable<TEntity> allData = filterableEntityQry == null ? await GetAllAsync() : filterableEntityQry;
 
             var dataCount = allData.Count();
             var totalPages = Math.Ceiling((decimal)dataCount / pageSize);
 
-            var orderedData = allData.AsQueryable().OrderBy(sorter);
+            var orderedData = orderByDesc? allData.AsQueryable().OrderByDescending(sorter) : allData.AsQueryable().OrderBy(sorter) ;
 
             var pagedQuery = orderedData.Skip(page * pageSize).Take(pageSize).ToList();
 

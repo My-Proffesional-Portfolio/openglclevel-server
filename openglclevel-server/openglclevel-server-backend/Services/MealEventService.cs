@@ -53,7 +53,7 @@ namespace openglclevel_server_backend.Services
             newMealEventDB.MealDate = mealEvent.EventDate;
             newMealEventDB.CreationDate = DateTime.Now;
             newMealEventDB.GlcLevel = mealEvent.GlcLevel;
-            newMealEventDB.Notes = mealEvent.Postprandial ? "Posprandial" : "";
+            newMealEventDB.Notes = mealEvent.Postprandial ? "Postprandial" : "";
             newMealEventDB.Id = Guid.NewGuid();
             newMealEventDB.UserId = userID;
 
@@ -110,7 +110,7 @@ namespace openglclevel_server_backend.Services
             }
 
             var data = await _eventRepo.GetAllPagedAsync(page, itemsPerPage,
-                sorter: (o => o.CreationDate), mealEvents);
+                sorter: (o => o.MealDate), mealEvents, orderByDesc: true);
 
             var response = new PaginationListEntityModel<MealEventModel>();
 
