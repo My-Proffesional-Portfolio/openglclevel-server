@@ -57,25 +57,37 @@ namespace openglclevel_server_backend.Services
             newMealEventDB.Id = Guid.NewGuid();
             newMealEventDB.UserId = userID;
 
-            var mealEventItems = new List<MealEventItem>();
 
-            mealEvent.ItemMeals.ForEach(fe =>
+            for (int i = 0; i < 4; i++)
             {
-                mealEventItems.Add(new MealEventItem()
+
+                var mealEventItems = new List<MealEventItem>();
+
+                mealEvent.ItemMeals.ForEach(fe =>
                 {
-                    Id = Guid.NewGuid(),
-                    MealEventId = newMealEventDB.Id,
-                    Description = "",
-                    Unit = fe.Quantity,
-                    MealItemId = fe.ID
+                    mealEventItems.Add(new MealEventItem()
+                    {
+                        Id = Guid.NewGuid(),
+                        MealEventId = newMealEventDB.Id,
+                        Description = "",
+                        Unit = fe.Quantity,
+                        MealItemId = fe.ID
+                    });
                 });
-            });
 
 
-            await _eventItemRepo.AddRangeAsync(mealEventItems);
-            await _eventRepo.AddAsync(newMealEventDB);
 
-            await _dbContext.SaveChangesAsync();
+                await _eventItemRepo.AddRangeAsync(mealEventItems);
+            }
+            try
+            {
+                await _eventRepo.AddAsync(newMealEventDB);
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
             return newMealEventDB.Id;
 
         }
