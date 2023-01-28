@@ -48,6 +48,7 @@ namespace openglclevel_server_api.Controllers
         // POST api/<AccountController>
         [HttpPost]
         [Route("register")]
+        [AutomaticExceptionHandler]
         public async Task<IActionResult> Post([FromBody] NewRegisterModel value)
         {
            var result = await _userSC.RegisterUser(value);

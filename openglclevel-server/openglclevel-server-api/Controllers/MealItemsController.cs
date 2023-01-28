@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using openglclevel_server_api.Filters;
 using openglclevel_server_api.UtilControllers;
 using openglclevel_server_backend.Services;
 using openglclevel_server_infrastructure.Services;
@@ -25,6 +26,8 @@ namespace openglclevel_server_api.Controllers
 
         // GET api/<MealItemsController>/5
         [HttpGet]
+        [AutomaticExceptionHandler]
+        [UserActionFilter]
         public async Task<IActionResult> Get(int page, int itemsPerPage, string searchTerm = "")
         {
             var items = await _mealItemSC.GetMealItems( page, itemsPerPage, searchTerm);

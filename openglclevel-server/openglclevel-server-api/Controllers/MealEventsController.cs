@@ -34,6 +34,8 @@ namespace openglclevel_server_api.Controllers
         }
 
         [HttpGet("id")]
+        [AutomaticExceptionHandler]
+        [UserActionFilter]
         public IActionResult Get(Guid eventId)
         {
             var eventDetail =  _eventSC.GetMealEventDetails(eventId);
