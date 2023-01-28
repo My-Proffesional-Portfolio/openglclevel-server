@@ -46,13 +46,18 @@ namespace openglclevel_server_backend.Services
             var userID = StaticMemoryVariables.UserID;
             List<ExistingMealItemPair> normalizedInputItems = await AddNewMealItemsForEvent(userID, mealEvent);
 
+            mealEvent.ItemMeals = new List<ExistingMealItemPair>();
             mealEvent.ItemMeals = mealEvent.ItemMeals.Union(normalizedInputItems).ToList();
 
             var newMealEventDB = new MealEvent();
             newMealEventDB.MealAtDay =  MealTypes.GetMealTypesDefinition().FirstOrDefault(f=> f.Type == mealEvent.MealType).Name;
-            newMealEventDB.MealDate = mealEvent.EventDate;
+            Random random = new Random();
+            var days = random.Next(0, 600);
+            newMealEventDB.MealDate = DateTime.Now.AddDays(days * -1);
             newMealEventDB.CreationDate = DateTime.Now;
-            newMealEventDB.GlcLevel = mealEvent.GlcLevel;
+            Random randomGlc = new Random();
+            var glcLevel = random.Next(90, 250);
+            newMealEventDB.GlcLevel = glcLevel;
             newMealEventDB.Notes = mealEvent.Postprandial ? "Postprandial" : "";
             newMealEventDB.Id = Guid.NewGuid();
             newMealEventDB.UserId = userID;
@@ -101,7 +106,7 @@ namespace openglclevel_server_backend.Services
                 foreach (var nM in mealEvent.NewMeals)
                 {
                     var localMeal = new NewMealItemModel();
-                    localMeal.Name = nM.Name;
+                    localMeal.Name = nM.Name + "-" + Guid.NewGuid().ToString();
                     var mealDB = await _mealItemSC.AddSingleMealItemToUser(userID, localMeal);
 
                     normalizedInputItems.Add(new ExistingMealItemPair() { ID = mealDB.ID, Quantity = nM.Quantity });

@@ -66,7 +66,7 @@ namespace openglclevel_server_api.Controllers
         public async Task<IActionResult> Post([FromBody] NewMealEventModel newEvent)
         {
             Guid result = Guid.Empty;
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 750; i++)
             {
                  result = await _eventSC.AddMealEvent(newEvent);
             }
