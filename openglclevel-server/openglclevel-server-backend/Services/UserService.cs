@@ -43,7 +43,7 @@ namespace openglclevel_server_backend.Services
 
         }
 
-        public async Task<TokenResultModel> Login(string userName, string password)
+        public async Task<TokenResultModel> Login(string userName, string password, bool? tokenForDeleteAction = false)
         {
             var user = _userRepository.FindByExpresion(u => u.UserName == userName).FirstOrDefault();
 
@@ -60,6 +60,11 @@ namespace openglclevel_server_backend.Services
                 new KeyValuePair<string, string>("userID", user.Id.ToString()),
                 new KeyValuePair<string, string>("userName", user.Name)
             };
+
+            if (tokenForDeleteAction.HasValue && tokenForDeleteAction.Value)
+            {
+                tokenClaims.Add(new KeyValuePair<string, string>("allowDeleteActionToken", "true"));
+            }    
 
             var tokenData = _tokenHandler.GenerateToken(tokenClaims, user.Id);
             //https://github.com/dotnet/AspNetCore.Docs/issues/7076

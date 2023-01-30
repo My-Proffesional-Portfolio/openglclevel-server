@@ -28,9 +28,9 @@ namespace openglclevel_server_api.Controllers
         [HttpGet]
         [Route("login")]
         [AutomaticExceptionHandler]
-        public async Task<IActionResult> login(string userName, string password)
+        public async Task<IActionResult> login(string userName, string password, bool? tokenForDeleteAction = false)
         {
-            var result = await _userSC.Login(userName, password);
+            var result = await _userSC.Login(userName, password, tokenForDeleteAction);
             _httpContext.HttpContext.Session.SetString("userID", result.UserID.ToString());
             return Ok(result);
         }
