@@ -28,3 +28,6 @@
 /openglclevel-server/openglclevel-server-backend/obj/Release/net7.0
 /openglclevel-server/openglclevel-server-data/obj/Debug/net7.0/ref
 /openglclevel-server/openglclevel-server-data/obj/Debug/net7.0/refint
+/openglclevel-server/openglclevel-server-api/obj/Release/net7.0
+/openglclevel-server/openglclevel-server-api/bin/Debug/net7.0/runtimes
+/openglclevel-server/openglclevel-server-api/bin/Release/net7.0
