@@ -35,7 +35,8 @@ namespace openglclevel_server_security.TokenManager
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_securityKeysValues.JWT_PrivateKey));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var expiration = DateTime.Now.AddDays(365);
+            var expiration = permClaims.Any(a=> a.Type == "allowDeleteActionToken" && a.Value == "true") ? 
+                DateTime.Now.AddSeconds(30) : DateTime.Now.AddDays(365);
 
             var token = new JwtSecurityToken("openglclevel-app",
               tokenAudience, claims: permClaims,

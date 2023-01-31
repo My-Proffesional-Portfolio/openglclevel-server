@@ -19,7 +19,7 @@ namespace openglclevel_server_api
         {
             services.AddSwaggerGen(option =>
             {
-                option.SwaggerDoc("v1", new OpenApiInfo { Title = "Openclg API(24-01-2023 v2)", Version = "v1" });
+                option.SwaggerDoc("v1", new OpenApiInfo { Title = "Openclg API PROD(27-01-2023 v2)", Version = "v1" });
                 option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
@@ -81,9 +81,13 @@ namespace openglclevel_server_api
                     ValidateIssuerSigningKey = true,
                     ValidateIssuer = true,
                     ValidateAudience = true,
+                    ValidateLifetime= true,
+                    RequireExpirationTime= true,
                     ValidIssuer = "openglclevel-app",
                     ValidAudience = "openglclevel-app",
                     IssuerSigningKey = mySecurityKey,
+                    //https://stackoverflow.com/questions/43045035/jwt-token-authentication-expired-tokens-still-working-net-core-web-api
+                    ClockSkew = TimeSpan.Zero
                 };
             });
         }
