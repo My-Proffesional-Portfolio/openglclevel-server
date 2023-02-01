@@ -49,7 +49,7 @@ namespace openglclevel_server_backend.Services
             mealEvent.ItemMeals = mealEvent.ItemMeals.Union(normalizedInputItems).ToList();
 
             var newMealEventDB = new MealEvent();
-            newMealEventDB.MealAtDay =  MealTypes.GetMealTypesDefinition().FirstOrDefault(f=> f.Type == mealEvent.MealType).Name;
+            newMealEventDB.MealAtDay = MealTypes.GetMealTypesDefinition().FirstOrDefault(f => f.Type == mealEvent.MealType).Name;
             newMealEventDB.MealDate = mealEvent.EventDate;
             newMealEventDB.CreationDate = DateTime.Now;
             newMealEventDB.GlcLevel = mealEvent.GlcLevel;
@@ -169,7 +169,7 @@ namespace openglclevel_server_backend.Services
         public MealEventDedtailsModel GetMealEventDetails(Guid eventId)
         {
             var result = new MealEventDedtailsModel();
-            var mealEvent = _eventRepo.FindByExpresion(f => f.Id == eventId).Include(i => i.MealEventItems).ThenInclude(thi=> thi.MealItem).FirstOrDefault();
+            var mealEvent = _eventRepo.FindByExpresion(f => f.Id == eventId).Include(i => i.MealEventItems).ThenInclude(thi => thi.MealItem).FirstOrDefault();
 
             result.GlcLevel = mealEvent.GlcLevel;
             result.Id = mealEvent.Id;
@@ -185,6 +185,26 @@ namespace openglclevel_server_backend.Services
                 }).ToList();
 
             return result;
+        }
+
+
+        public async Task<bool> DeleteEventMealWithItems(Guid eventID)
+        {
+            var userID = StaticMemoryVariables.UserID;
+            var eventToDelete = await _eventRepo.FindByExpresion(f=> f.UserId == userID && f.Id == eventID)
+                .Include(i=> i.MealEventItems).FirstOrDefaultAsync();
+
+            if (eventToDelete == null)
+            {
+                throw new FriendlyException("Event does not exist in database");
+            }
+
+            _eventItemRepo.DeleteRangeAsync(eventToDelete.MealEventItems);
+            _eventRepo.DeleteAsync(eventToDelete);
+            _dbContext.SaveChanges();
+
+            return true;
+
         }
     }
 }

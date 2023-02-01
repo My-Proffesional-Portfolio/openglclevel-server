@@ -3,7 +3,7 @@ using openglclevel_server_api.UtilControllers;
 using openglclevel_server_models;
 using openglclevel_server_models.Exceptions;
 
-namespace openglclevel_server_api
+namespace openglclevel_server_api.Filters
 {
     public class UserActionFilter : ActionFilterAttribute
     {

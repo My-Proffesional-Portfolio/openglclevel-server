@@ -14,6 +14,7 @@ namespace openglclevel_server_infrastructure.Services
         public Task<Guid> AddMealEvent(NewMealEventModel mealEvent);
         public Task<PaginationListEntityModel<MealEventModel>> GetEvents(int page, int itemsPerPage, string searchTerm = null);
         public Task<UserMetricsModel> GetEventsGlcAverage();
-       MealEventDedtailsModel GetMealEventDetails(Guid eventId);
+        MealEventDedtailsModel GetMealEventDetails(Guid eventId);
+        public Task<bool> DeleteEventMealWithItems(Guid mealEvent);
     }
 }

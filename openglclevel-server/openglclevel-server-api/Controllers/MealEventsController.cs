@@ -71,6 +71,15 @@ namespace openglclevel_server_api.Controllers
             return Ok(result);
         }
 
+        [HttpDelete("id")]
+        [AutomaticExceptionHandler]
+        [UserActionFilter]
+        [DeleteAuthorizationFilter]
+        public async Task<IActionResult> Delete(Guid eventId)
+        {
+            var eventDetail = await _eventSC.DeleteEventMealWithItems(eventId);
+            return Ok(eventDetail);
+        }
 
     }
 }
