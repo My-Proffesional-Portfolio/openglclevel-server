@@ -24,12 +24,13 @@ namespace openglclevel_server_backend.Services
         private readonly IMealItemService _mealItemSC;
         private readonly IMealEventItemsRepository _eventItemRepo;
         private readonly IMealEventRepository _eventRepo;
+        private readonly IMealItemRepository _mealItemRepository;
         private readonly OpenglclevelContext _dbContext;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUserRepository _userRepository;
         public MealEventService(IMealItemService mealItemSC, IMealEventItemsRepository eventItemRepo,
             IMealEventRepository eventRepo, OpenglclevelContext dbContext, IHttpContextAccessor httpContextAccessor,
-            IUserRepository userRepository)
+            IUserRepository userRepository, IMealItemRepository mealItemRepository)
         {
             _mealItemSC = mealItemSC;
             _eventItemRepo = eventItemRepo;
@@ -37,6 +38,8 @@ namespace openglclevel_server_backend.Services
             _dbContext = dbContext;
             _httpContextAccessor = httpContextAccessor;
             _userRepository = userRepository;
+            _mealItemSC= mealItemSC;
+            _mealItemRepository = mealItemRepository;
         }
 
         public async Task<Guid> AddMealEvent(NewMealEventModel mealEvent)
@@ -106,7 +109,19 @@ namespace openglclevel_server_backend.Services
 
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
-                mealEvents = mealEvents.Where(w => w.Notes.Contains(searchTerm));
+                //mealEvents = mealEvents.Where(w => w.Notes.Contains(searchTerm));
+                //mealEvents = mealEvents.SelectMany(sm=> sm.MealEventItems).Select(s=> s.MealItem).Where(w=> w.MealName == searchTerm).Select(s=> s.);
+                //var meals = mealEvents.SelectMany(sm =>  sm.MealEventItems).Select(s => s.MealItem).Where(w => w.MealName.Contains(searchTerm)).Include(i=> i.MealEventItems);
+                //var mealEventItems = meals.Select(s => s.MealEventItems);
+                //var mealEventsQry =  mealEventItems.Select(s=> s.)
+                var mealEventsWithMeal = _mealItemRepository.FindByExpresion(f => f.MealName.Contains(searchTerm)).Include(i=> i.MealEventItems)
+                    .SelectMany(s => s.MealEventItems.AsEnumerable()).AsEnumerable();
+
+                var mealEventIDs = mealEventsWithMeal.Select(s => s.MealEventId);
+
+                 mealEvents = mealEvents.Where(w=> mealEventIDs.Contains(w.Id)).AsQueryable();
+                //mealEvents = mealEvents.Where(w=> w.MealEventItems.Intersect(mealEventsWithMeal)
+
             }
 
             var data = await _eventRepo.GetAllPagedAsync(page, itemsPerPage,

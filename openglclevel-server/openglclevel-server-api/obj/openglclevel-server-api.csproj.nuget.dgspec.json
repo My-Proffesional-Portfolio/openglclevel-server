@@ -1,41 +1,49 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Rolando\\Desktop\\Code 2023\\openglclevel\\openglclevel-server\\openglclevel-server-api\\openglclevel-server-api.csproj": {}
+    "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-api\\openglclevel-server-api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Rolando\\Desktop\\Code 2023\\openglclevel\\openglclevel-server\\openglclevel-server-api\\openglclevel-server-api.csproj": {
+    "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-api\\openglclevel-server-api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Rolando\\Desktop\\Code 2023\\openglclevel\\openglclevel-server\\openglclevel-server-api\\openglclevel-server-api.csproj",
+        "projectUniqueName": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-api\\openglclevel-server-api.csproj",
         "projectName": "openglclevel-server-api",
-        "projectPath": "C:\\Users\\Rolando\\Desktop\\Code 2023\\openglclevel\\openglclevel-server\\openglclevel-server-api\\openglclevel-server-api.csproj",
+        "projectPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-api\\openglclevel-server-api.csproj",
         "packagesPath": "C:\\Users\\Rolando\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Rolando\\Desktop\\Code 2023\\openglclevel\\openglclevel-server\\openglclevel-server-api\\obj\\",
+        "outputPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-api\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
           "C:\\Users\\Rolando\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-backend\\openglclevel-server-core.csproj": {
+                "projectPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-backend\\openglclevel-server-core.csproj"
+              },
+              "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-data\\openglclevel-server-data.csproj": {
+                "projectPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-data\\openglclevel-server-data.csproj"
+              },
+              "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-infrastructure\\openglclevel-server-infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-infrastructure\\openglclevel-server-infrastructure.csproj"
+              },
+              "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-models\\openglclevel-server-models.csproj": {
+                "projectPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-models\\openglclevel-server-models.csproj"
+              },
+              "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-security\\openglclevel-server-security.csproj": {
+                "projectPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-security\\openglclevel-server-security.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -48,9 +56,27 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[7.0.2, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.2, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -76,7 +102,343 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-backend\\openglclevel-server-core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-backend\\openglclevel-server-core.csproj",
+        "projectName": "openglclevel-server-core",
+        "projectPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-backend\\openglclevel-server-core.csproj",
+        "packagesPath": "C:\\Users\\Rolando\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-backend\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Rolando\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-infrastructure\\openglclevel-server-infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-infrastructure\\openglclevel-server-infrastructure.csproj"
+              },
+              "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-models\\openglclevel-server-models.csproj": {
+                "projectPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-models\\openglclevel-server-models.csproj"
+              },
+              "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-security\\openglclevel-server-security.csproj": {
+                "projectPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-security\\openglclevel-server-security.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Http.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Http.Extensions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "RestSharp": {
+              "target": "Package",
+              "version": "[106.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-data\\openglclevel-server-data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-data\\openglclevel-server-data.csproj",
+        "projectName": "openglclevel-server-data",
+        "projectPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-data\\openglclevel-server-data.csproj",
+        "packagesPath": "C:\\Users\\Rolando\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-data\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Rolando\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-infrastructure\\openglclevel-server-infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-infrastructure\\openglclevel-server-infrastructure.csproj",
+        "projectName": "openglclevel-server-infrastructure",
+        "projectPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-infrastructure\\openglclevel-server-infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Rolando\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Rolando\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-data\\openglclevel-server-data.csproj": {
+                "projectPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-data\\openglclevel-server-data.csproj"
+              },
+              "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-models\\openglclevel-server-models.csproj": {
+                "projectPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-models\\openglclevel-server-models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-models\\openglclevel-server-models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-models\\openglclevel-server-models.csproj",
+        "projectName": "openglclevel-server-models",
+        "projectPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-models\\openglclevel-server-models.csproj",
+        "packagesPath": "C:\\Users\\Rolando\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-models\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Rolando\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-security\\openglclevel-server-security.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-security\\openglclevel-server-security.csproj",
+        "projectName": "openglclevel-server-security",
+        "projectPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-security\\openglclevel-server-security.csproj",
+        "packagesPath": "C:\\Users\\Rolando\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-security\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Rolando\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-models\\openglclevel-server-models.csproj": {
+                "projectPath": "C:\\Users\\Rolando\\Desktop\\Code\\openclg-server\\openglclevel-server\\openglclevel-server\\openglclevel-server-models\\openglclevel-server-models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.25.1, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.25.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

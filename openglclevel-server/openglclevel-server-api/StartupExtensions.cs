@@ -19,7 +19,7 @@ namespace openglclevel_server_api
         {
             services.AddSwaggerGen(option =>
             {
-                option.SwaggerDoc("v1", new OpenApiInfo { Title = "Openclg API QA(31-01-2023 v2)", Version = "v1" });
+                option.SwaggerDoc("v1", new OpenApiInfo { Title = "Openclg API PROD(31-01-2023 v1)", Version = "v1" });
                 option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
